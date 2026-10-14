@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Care departament ți se potrivește? ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink: #ff4fa3;
+      --hot: #ff1f8e;
+      --lilac: #b388ff;
+      --peach: #ffb3d9;
+      --text: #4a1236;
+      --muted: #8a4a6d;
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0;
+      font-family: "Poppins", system-ui, sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, #ffd1ec 0%, #ffb3d9 30%, #e0b3ff 65%, #ffd1ec 100%);
+      background-size: 300% 300%;
+      animation: bgshift 14s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 28px 16px 48px;
+      overflow-x: hidden;
+    }
+    @keyframes bgshift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+    .sparkle {
+      position: fixed; top: -30px; pointer-events: none; z-index: 0;
+      animation: fall linear forwards; opacity: .9;
+    }
+    @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+
+    .card {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 540px;
+      background: rgba(255,255,255,.72);
+      -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+      border: 2px solid rgba(255,255,255,.9);
+      border-radius: 28px;
+      padding: 30px 24px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(255, 79, 163, .35), 0 0 0 6px rgba(255,255,255,.35);
+    }
+    h1 {
+      font-family: "Pacifico", cursive;
+      font-weight: 400;
+      font-size: 34px;
+      line-height: 1.25;
+      margin: 6px 0 10px;
+      background: linear-gradient(90deg, var(--hot), var(--lilac), var(--hot));
+      background-size: 200% auto;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      animation: shine 4s linear infinite;
+    }
+    @keyframes shine { to { background-position: 200% center; } }
+    h2 { font-size: 20px; font-weight: 600; margin: 10px 0 20px; line-height: 1.35; }
+    p { color: var(--muted); margin: 8px 0; line-height: 1.5; }
+    .big-emoji { font-size: 54px; display: inline-block; animation: bob 2.4s ease-in-out infinite; }
+    @keyframes bob { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-8px) rotate(4deg); } }
+
+    .count { font-size: 13px; font-weight: 600; color: var(--hot); margin: 0 0 8px; letter-spacing: .5px; }
+    .progress { height: 12px; background: rgba(255,255,255,.8); border-radius: 99px; margin-bottom: 14px; overflow: hidden; border: 1px solid var(--peach); }
+    .bar {
+      height: 100%; width: 0; border-radius: 99px; transition: width .4s ease;
+      background: linear-gradient(90deg, var(--pink), var(--lilac), var(--pink));
+      background-size: 200% 100%; animation: shine 2s linear infinite;
+    }
+
+    button {
+      display: block; width: 100%; margin: 12px 0; padding: 16px 18px;
+      font: 500 16px "Poppins", system-ui, sans-serif; color: var(--text);
+      text-align: left; cursor: pointer;
+      background: #fff; border: 2px solid var(--peach); border-radius: 18px;
+      box-shadow: 0 4px 0 var(--peach);
+      transition: transform .12s, box-shadow .12s, border-color .12s, background .12s;
+    }
+    button:hover, button:focus-visible { border-color: var(--hot); background: #fff0f8; transform: translateY(-2px); box-shadow: 0 6px 0 var(--pink); outline: none; }
+    button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--pink); }
+    button.primary {
+      text-align: center; color: #fff; font-weight: 700; font-size: 18px; border: none;
+      background: linear-gradient(90deg, var(--hot), var(--lilac));
+      box-shadow: 0 6px 0 #c2166f, 0 10px 24px rgba(255,31,142,.4);
+    }
+    button.primary:hover { background: linear-gradient(90deg, #ff3ba0, #c4a0ff); box-shadow: 0 8px 0 #c2166f, 0 12px 28px rgba(255,31,142,.5); }
+    button.primary:active { transform: translateY(4px); box-shadow: 0 2px 0 #c2166f; }
+
+    .result-name {
+      font-family: "Pacifico", cursive; font-size: 40px; line-height: 1.2; margin: 6px 0 12px;
+      background: linear-gradient(90deg, var(--hot), var(--lilac));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+    }
+    .result-name.tie { font-size: 28px; }
+    .dept { text-align: left; background: #fff; border: 2px solid var(--peach); border-radius: 18px; padding: 6px 16px; margin: 12px 0; }
+    .dept p { color: var(--text); }
+    .foot { font-size: 13px; opacity: .8; }
+
+    @media (prefers-reduced-motion: reduce) {
+      body, h1, .bar, .big-emoji { animation: none; }
+      .sparkle { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="app"></div>
+
+  <script>
+    // ====== EDITEAZĂ AICI ======
+    const departments = {
+      "Fundraising": {
+        emoji: "💸",
+        text: "Ești persuasiv(ă) și plin(ă) de resurse. Fundraising-ul aduce banii și lucrurile faine: donații, sponsori și orice obiecte pe care ni le pot oferi companiile. Orice ajutor contează! 💕"
+      },
+      "PR": {
+        emoji: "📸",
+        text: "Ai ochi pentru estetică și știi să vorbești cu lumea. PR-ul se ocupă de Instagram și de rețelele sociale, plus materialele printabile de câte ori e nevoie. ✨"
+      },
+      "Evenimente": {
+        emoji: "🎉",
+        text: "Ești un organizator înnăscut. Echipa de Evenimente planifică petreceri și seri de quiz, dar și evenimente științifice: conferințe, workshopuri și multe altele. 🥂"
+      }
+    };
+
+    // d: "ALL" = răspuns care dă 1 punct în fiecare departament
+    const questions = [
+      { q: "Alege o misiune pentru weekend:", a: [
+        { t: "Conving o firmă locală să doneze ceva", d: "Fundraising" },
+        { t: "Fac un poster sau o postare pentru ce urmează", d: "PR" },
+        { t: "Planific programul unei zile mari", d: "Evenimente" },
+        { t: "Puțin din toate", d: "ALL" } ] },
+      { q: "Prietenii tăi spun că ești cel mai bun/bună la:", a: [
+        { t: "Să convingi oamenii de lucruri", d: "Fundraising" },
+        { t: "Gust bun și ochi format pentru estetică", d: "PR" },
+        { t: "Să aduni pe toată lumea la un loc", d: "Evenimente" },
+        { t: "Orice e nevoie în echipă", d: "ALL" } ] },
+      { q: "Care ți se pare cel mai satisfăcător moment?", a: [
+        { t: "Când găsesc un sponsor", d: "Fundraising" },
+        { t: "Când o postare devine virală", d: "PR" },
+        { t: "Când văd sala plină la ceva organizat de mine", d: "Evenimente" },
+        { t: "Sincer, toate sună bine", d: "ALL" } ] },
+      { q: "Alege o unealtă:", a: [
+        { t: "Un tabel cu firme de contactat", d: "Fundraising" },
+        { t: "O aplicație de design și un calendar de conținut", d: "PR" },
+        { t: "O listă de task-uri și o rezervare de locație", d: "Evenimente" },
+        { t: "Orice, învăț pe parcurs", d: "ALL" } ] },
+      { q: "Ce faci într-un proiect de grup?", a: [
+        { t: "Găsesc resursele și rezolv problemele practice", d: "Fundraising" },
+        { t: "Fac totul să arate bine și prezint", d: "PR" },
+        { t: "Țin pe toată lumea organizată și la timp", d: "Evenimente" },
+        { t: "Ajut acolo unde e nevoie", d: "ALL" } ] },
+      { q: "Alege un superputere:", a: [
+        { t: "Nimeni nu îmi spune niciodată nu", d: "Fundraising" },
+        { t: "Tot ce postez devine viral", d: "PR" },
+        { t: "Pot fi în cinci locuri deodată", d: "Evenimente" },
+        { t: "Să mă adaptez la orice", d: "ALL" } ] },
+      { q: "Urmează o conferință. Tu ești cel/cea care:", a: [
+        { t: "Cere companiilor sponsorizări sau donații", d: "Fundraising" },
+        { t: "Postează despre ea și face afișele", d: "PR" },
+        { t: "O organizează și o coordonează în ziua respectivă", d: "Evenimente" },
+        { t: "Face puțin din toate", d: "ALL" } ] },
+      { q: "Ce obicei ai pe telefon?", a: [
+        { t: "Trimit mailuri și mesaje către contacte", d: "Fundraising" },
+        { t: "Dau scroll pe Instagram și salvez idei", d: "PR" },
+        { t: "Stau pe grupuri și organizez ieșiri", d: "Evenimente" },
+        { t: "Un mix din toate trei", d: "ALL" } ] },
+      { q: "De ce ai fi cel mai mândru/mândră?", a: [
+        { t: "Că am atins ținta de strângere de fonduri", d: "Fundraising" },
+        { t: "O postare sau un afiș care a plăcut tuturor", d: "PR" },
+        { t: "Un eveniment despre care se vorbește și acum", d: "Evenimente" },
+        { t: "Să văd echipa reușind împreună", d: "ALL" } ] },
+      { q: "Care e vibe-ul tău?", a: [
+        { t: "Hustler: văd o oportunitate peste tot", d: "Fundraising" },
+        { t: "Creativ(ă): mereu creez ceva", d: "PR" },
+        { t: "Gazdă: mereu adun oamenii laolaltă", d: "Evenimente" },
+        { t: "Flexibil(ă): mă adaptez la orice", d: "ALL" } ] }
+    ];
+    // ====== SFÂRȘIT ======
+
+    const app = document.getElementById("app");
+    let scores, current;
+
+    function shuffle(arr) {
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function sparkles(n, emojis) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      for (let i = 0; i < n; i++) {
+        const s = document.createElement("span");
+        s.className = "sparkle";
+        s.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.fontSize = 14 + Math.random() * 22 + "px";
+        s.style.animationDuration = 4 + Math.random() * 5 + "s";
+        s.style.animationDelay = Math.random() * 2 + "s";
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 11000);
+      }
+    }
+
+    function start() {
+      scores = {};
+      Object.keys(departments).forEach(d => scores[d] = 0);
+      current = 0;
+      app.innerHTML = `
+        <div class="big-emoji">💅</div>
+        <h1>Care departament ți se potrivește?</h1>
+        <p>${questions.length} întrebări rapide. Vibe-ul tău ne spune tot ✨</p>
+        <button class="primary" id="go">Începe 💖</button>`;
+      document.getElementById("go").onclick = show;
+      sparkles(14, ["✨", "💖", "🌸", "💅"]);
+    }
+
+    function show() {
+      if (current >= questions.length) return result();
+      const q = questions[current];
+      app.innerHTML = `<p class="count">ÎNTREBAREA ${current + 1} DIN ${questions.length} ✨</p>
+        <div class="progress"><div class="bar" style="width:${(current / questions.length) * 100}%"></div></div><h2></h2>`;
+      app.querySelector("h2").textContent = q.q;
+      shuffle(q.a).forEach(ans => {
+        const b = document.createElement("button");
+        b.textContent = ans.t;
+        b.onclick = () => {
+          if (ans.d === "ALL") { Object.keys(scores).forEach(k => scores[k]++); }
+          else { scores[ans.d]++; }
+          current++; show();
+        };
+        app.appendChild(b);
+      });
+    }
+
+    function result() {
+      const max = Math.max(...Object.values(scores));
+      const winners = Object.keys(scores).filter(d => scores[d] === max);
+      let html;
+
+      if (winners.length === 1) {
+        const w = winners[0];
+        html = `<div class="big-emoji">${departments[w].emoji}</div>
+                <p>Departamentul tău este</p>
+                <div class="result-name">${w}</div>
+                <p>${departments[w].text}</p>`;
+      } else {
+        const names = winners.length === 2
+          ? winners.join(" și ")
+          : winners.slice(0, -1).join(", ") + " și " + winners[winners.length - 1];
+        const both = winners.length === 2 ? "ambele departamente" : "toate departamentele";
+        html = `<div class="big-emoji">👯</div>
+                <p>Egalitate! 💞</p>
+                <div class="result-name tie">Te-ai potrivi în ${both}</div>
+                <p><strong>${names}</strong></p>
+                ${winners.map(w => `<div class="dept"><p><strong>${departments[w].emoji} ${w}:</strong> ${departments[w].text}</p></div>`).join("")}`;
+      }
+
+      app.innerHTML = html + `<button class="primary" id="again">Refă quiz-ul ✨</button>`;
+      document.getElementById("again").onclick = start;
+      sparkles(40, ["✨", "💖", "🎀", "🌸", "💅", "🎉"]);
+    }
+
+    start();
+  </script>
+</body>
+</html>

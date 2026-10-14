@@ -125,64 +125,84 @@
         emoji: "📸",
         text: "Ai ochi pentru estetică și știi să vorbești cu lumea. PR-ul se ocupă de Instagram și de rețelele sociale, plus materialele printabile de câte ori e nevoie. ✨"
       },
-      "Evenimente": {
+      "Events": {
         emoji: "🎉",
-        text: "Ești un organizator înnăscut. Echipa de Evenimente planifică petreceri și seri de quiz, dar și evenimente științifice: conferințe, workshopuri și multe altele. 🥂"
+        text: "Ești un organizator înnăscut. Echipa de Events planifică petreceri și seri de quiz, dar și evenimente științifice: conferințe, workshopuri și multe altele. 🥂"
       }
     };
 
-    // d: "ALL" = răspuns care dă 1 punct în fiecare departament
+    // ------------------------------------------------------------
+    // CUM SE EDITEAZĂ ÎNTREBĂRILE:
+    //   q = textul întrebării
+    //   t = textul unui răspuns
+    //   d = departamentul care primește 1 punct:
+    //       "Fundraising", "PR", "Events"
+    //       sau "ALL" = răspuns neutru, 1 punct la toate trei
+    // Păstrează ghilimelele " " în jurul textelor și virgulele de la sfârșitul
+    // rândurilor. Nu folosi ghilimele drepte " în interiorul textului
+    // (folosește „ ” sau ' în schimb).
+    // Ordinea răspunsurilor se amestecă automat de fiecare dată.
+    // ------------------------------------------------------------
     const questions = [
-      { q: "Alege o misiune pentru weekend:", a: [
-        { t: "Conving o firmă locală să doneze ceva", d: "Fundraising" },
-        { t: "Fac un poster sau o postare pentru ce urmează", d: "PR" },
-        { t: "Planific programul unei zile mari", d: "Evenimente" },
-        { t: "Puțin din toate", d: "ALL" } ] },
-      { q: "Prietenii tăi spun că ești cel mai bun/bună la:", a: [
-        { t: "Să convingi oamenii de lucruri", d: "Fundraising" },
-        { t: "Gust bun și ochi format pentru estetică", d: "PR" },
-        { t: "Să aduni pe toată lumea la un loc", d: "Evenimente" },
-        { t: "Orice e nevoie în echipă", d: "ALL" } ] },
-      { q: "Care ți se pare cel mai satisfăcător moment?", a: [
-        { t: "Când găsesc un sponsor", d: "Fundraising" },
-        { t: "Când o postare devine virală", d: "PR" },
-        { t: "Când văd sala plină la ceva organizat de mine", d: "Evenimente" },
-        { t: "Sincer, toate sună bine", d: "ALL" } ] },
-      { q: "Alege o unealtă:", a: [
-        { t: "Un tabel cu firme de contactat", d: "Fundraising" },
-        { t: "O aplicație de design și un calendar de conținut", d: "PR" },
-        { t: "O listă de task-uri și o rezervare de locație", d: "Evenimente" },
-        { t: "Orice, învăț pe parcurs", d: "ALL" } ] },
-      { q: "Ce faci într-un proiect de grup?", a: [
-        { t: "Găsesc resursele și rezolv problemele practice", d: "Fundraising" },
-        { t: "Fac totul să arate bine și prezint", d: "PR" },
-        { t: "Țin pe toată lumea organizată și la timp", d: "Evenimente" },
-        { t: "Ajut acolo unde e nevoie", d: "ALL" } ] },
-      { q: "Alege un superputere:", a: [
-        { t: "Nimeni nu îmi spune niciodată nu", d: "Fundraising" },
-        { t: "Tot ce postez devine viral", d: "PR" },
-        { t: "Pot fi în cinci locuri deodată", d: "Evenimente" },
-        { t: "Să mă adaptez la orice", d: "ALL" } ] },
-      { q: "Urmează o conferință. Tu ești cel/cea care:", a: [
-        { t: "Cere companiilor sponsorizări sau donații", d: "Fundraising" },
-        { t: "Postează despre ea și face afișele", d: "PR" },
-        { t: "O organizează și o coordonează în ziua respectivă", d: "Evenimente" },
-        { t: "Face puțin din toate", d: "ALL" } ] },
-      { q: "Ce obicei ai pe telefon?", a: [
-        { t: "Trimit mailuri și mesaje către contacte", d: "Fundraising" },
-        { t: "Dau scroll pe Instagram și salvez idei", d: "PR" },
-        { t: "Stau pe grupuri și organizez ieșiri", d: "Evenimente" },
-        { t: "Un mix din toate trei", d: "ALL" } ] },
-      { q: "De ce ai fi cel mai mândru/mândră?", a: [
-        { t: "Că am atins ținta de strângere de fonduri", d: "Fundraising" },
-        { t: "O postare sau un afiș care a plăcut tuturor", d: "PR" },
-        { t: "Un eveniment despre care se vorbește și acum", d: "Evenimente" },
-        { t: "Să văd echipa reușind împreună", d: "ALL" } ] },
-      { q: "Care e vibe-ul tău?", a: [
-        { t: "Hustler: văd o oportunitate peste tot", d: "Fundraising" },
-        { t: "Creativ(ă): mereu creez ceva", d: "PR" },
-        { t: "Gazdă: mereu adun oamenii laolaltă", d: "Evenimente" },
-        { t: "Flexibil(ă): mă adaptez la orice", d: "ALL" } ] }
+      { q: "E vineri seara și ai o oră liberă doar pentru tine. Ce alegi?", a: [
+        { t: "Scriu cuiva ca să-i cer o favoare la care mă gândesc de ceva vreme", d: "Fundraising" },
+        { t: "Dau scroll, salvez idei și mă las inspirat(ă)", d: "PR" },
+        { t: "Scriu pe grup să văd cine iese undeva diseară", d: "Events" },
+        { t: "Stau liniștit(ă) și mă las dus(ă) de val", d: "ALL" } ] },
+
+      { q: "Ce te enervează cel mai tare când lucrezi într-un grup?", a: [
+        { t: "Când toți așteaptă și nimeni nu face primul pas", d: "Fundraising" },
+        { t: "Când ceva ar putea arăta mult mai bine, dar nimănui nu-i pasă", d: "PR" },
+        { t: "Când nu e nimic stabilit și toți improvizează pe loc", d: "Events" },
+        { t: "Când oamenii nu se ascultă între ei", d: "ALL" } ] },
+
+      { q: "Ți se dă o idee mare și un buget foarte mic. Prima ta reacție:", a: [
+        { t: "Mă gândesc cui aș putea cere ajutor sau ce aș putea obține gratis", d: "Fundraising" },
+        { t: "Mă gândesc cum o fac să pară scumpă, chiar dacă nu e", d: "PR" },
+        { t: "Mă gândesc cum o organizez ca să iasă bine oricum", d: "Events" },
+        { t: "Încep să notez idei și văd încotro mă duc", d: "ALL" } ] },
+
+      { q: "Cum ești de obicei la o petrecere?", a: [
+        { t: "Port conversații lungi și aflu cine ce face și ce poate", d: "Fundraising" },
+        { t: "Observ detaliile: luminile, outfiturile, atmosfera", d: "PR" },
+        { t: "Mă asigur că toți se simt bine și au cu cine să vorbească", d: "Events" },
+        { t: "Mă adaptez: uneori în centrul atenției, alteori într-un colț", d: "ALL" } ] },
+
+      { q: "Cum te-ar descrie cel mai bine prietenii?", a: [
+        { t: "Insistent(ă), în sens bun: nu renunți ușor", d: "Fundraising" },
+        { t: "Cu gust și simț estetic", d: "PR" },
+        { t: "Cel/cea care ține grupul unit", d: "Events" },
+        { t: "Greu de pus într-o singură cutie", d: "ALL" } ] },
+
+      { q: "Ce îți dă cea mai mare satisfacție la sfârșitul unei zile?", a: [
+        { t: "O țintă bifată: ceva obținut sau rezolvat", d: "Fundraising" },
+        { t: "Ceva creat care mi se pare frumos", d: "PR" },
+        { t: "Oameni care au plecat zâmbind de la ceva la care am contribuit", d: "Events" },
+        { t: "Să știu că am fost de folos cuiva", d: "ALL" } ] },
+
+      { q: "Primești un „nu” la o cerere importantă. Ce faci?", a: [
+        { t: "Întreb de ce, ajustez abordarea și mai încerc o dată", d: "Fundraising" },
+        { t: "Mă gândesc cum aș putea povesti altfel ideea ca să sune mai bine", d: "PR" },
+        { t: "Caut un plan B și îi anunț rapid pe ceilalți", d: "Events" },
+        { t: "Respir adânc și mă gândesc la pașii următori", d: "ALL" } ] },
+
+      { q: "Alege un loc în care te-ai simți în largul tău:", a: [
+        { t: "O masă la o cafenea, la o discuție importantă", d: "Fundraising" },
+        { t: "Un colț plin de lumină naturală, perfect pentru poze", d: "PR" },
+        { t: "O sală plină de oameni, cu muzică și forfotă", d: "Events" },
+        { t: "Orice loc în care am un pic de liniște", d: "ALL" } ] },
+
+      { q: "Când îți planifici ceva, cum arată notițele tale?", a: [
+        { t: "Liste cu oameni, firme și lucruri de obținut", d: "Fundraising" },
+        { t: "Culori, titluri, texte și imagini care îmi plac", d: "PR" },
+        { t: "Program la minut, responsabilități și plan B", d: "Events" },
+        { t: "Un haos organizat pe care doar eu îl înțeleg", d: "ALL" } ] },
+
+      { q: "Dacă ai putea face un singur lucru mare, care ar fi?", a: [
+        { t: "Aș strânge o sumă uriașă pentru o cauză care contează", d: "Fundraising" },
+        { t: "Aș crea ceva care ajunge la mii de oameni și îi face să se oprească din scroll", d: "PR" },
+        { t: "Aș organiza cel mai tare eveniment la care a fost cineva vreodată", d: "Events" },
+        { t: "Aș ajuta echipa cu orice ar avea nevoie", d: "ALL" } ] }
     ];
     // ====== SFÂRȘIT ======
 

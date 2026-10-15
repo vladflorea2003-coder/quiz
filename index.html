@@ -105,6 +105,14 @@
     .dept p { color: var(--text); }
     .foot { font-size: 13px; opacity: .8; }
 
+    button.selected { border-color: var(--hot); background: #fff0f8; }
+    button.back {
+      text-align: center; font-size: 14px; font-weight: 600; color: var(--muted);
+      background: transparent; border: 2px dashed var(--peach); box-shadow: none;
+      padding: 12px 16px; margin-top: 22px;
+    }
+    button.back:hover, button.back:focus-visible { color: var(--hot); border-color: var(--hot); background: #fff0f8; transform: none; box-shadow: none; }
+
     @media (prefers-reduced-motion: reduce) {
       body, h1, .bar, .big-emoji { animation: none; }
       .sparkle { display: none; }
@@ -207,7 +215,7 @@
     // ====== SFÂRȘIT ======
 
     const app = document.getElementById("app");
-    let scores, current;
+    let choices, current;
 
     function shuffle(arr) {
       const a = arr.slice();
@@ -234,8 +242,7 @@
     }
 
     function start() {
-      scores = {};
-      Object.keys(departments).forEach(d => scores[d] = 0);
+      choices = [];
       current = 0;
       app.innerHTML = `
         <div class="big-emoji">💅</div>
@@ -255,16 +262,31 @@
       shuffle(q.a).forEach(ans => {
         const b = document.createElement("button");
         b.textContent = ans.t;
+        if (choices[current] === ans) b.classList.add("selected");
         b.onclick = () => {
-          if (ans.d === "ALL") { Object.keys(scores).forEach(k => scores[k]++); }
-          else { scores[ans.d]++; }
+          choices[current] = ans;
           current++; show();
         };
         app.appendChild(b);
       });
+      if (current > 0) addBack();
+    }
+
+    function addBack() {
+      const b = document.createElement("button");
+      b.className = "back";
+      b.textContent = "← Înapoi la întrebarea anterioară";
+      b.onclick = () => { current--; show(); };
+      app.appendChild(b);
     }
 
     function result() {
+      const scores = {};
+      Object.keys(departments).forEach(d => scores[d] = 0);
+      choices.slice(0, questions.length).forEach(ans => {
+        if (ans.d === "ALL") { Object.keys(scores).forEach(k => scores[k]++); }
+        else { scores[ans.d]++; }
+      });
       const max = Math.max(...Object.values(scores));
       const winners = Object.keys(scores).filter(d => scores[d] === max);
       let html;
@@ -289,6 +311,7 @@
 
       app.innerHTML = html + `<button class="primary" id="again">Refă quiz-ul ✨</button>`;
       document.getElementById("again").onclick = start;
+      addBack();
       sparkles(40, ["✨", "💖", "🎀", "🌸", "💅", "🎉"]);
     }
 
